@@ -1,16 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="ImageSlider.MainPage">
-
+<ContentPage
+    x:Class="ImageSlider.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:ImageSlider"
+    mc:Ignorable="d">
+    <ContentPage.BindingContext>
+        <viewmodels:sliderImageViewModel />
+    </ContentPage.BindingContext>
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Frame
+            Margin="10"
+            Padding="0"
+            CornerRadius="15"
+            IsClippedToBounds="True">
+            <StackLayout
+                x:Name="slider"
+                HeightRequest="240"
+                HorizontalOptions="FillAndExpand">
+                <CarouselView
+                    x:Name="carouselView"
+                    Margin="0"
+                    IndicatorView="indicatorView"
+                    ItemsSource="{Binding sliderImage}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <StackLayout>
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="240"
+                                        Source="{Binding ImageUrl}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+            </StackLayout>
+        </Frame>
+
+        <StackLayout>
+            <IndicatorView
+                x:Name="indicatorView"
+                Margin="0,0,0,0"
+                HorizontalOptions="Center"
+                IndicatorColor="LightGray"
+                IndicatorsShape="Circle"
+                SelectedIndicatorColor="#F70000"
+                VerticalOptions="StartAndExpand" />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

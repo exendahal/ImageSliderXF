@@ -13,9 +13,18 @@ namespace ImageSlider
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        int SlidePosition = 0;
         public MainPage()
         {
             InitializeComponent();
+
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            {
+                SlidePosition++;
+                if (SlidePosition == 3) SlidePosition = 0;
+                carouselView.Position = SlidePosition;
+                return true;
+            });
         }
     }
 }
